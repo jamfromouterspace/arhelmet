@@ -24,12 +24,9 @@ chmod 755 deps.sh
 ```
 
 
-=======
-
 This version of AR Headset allows for basic functionalities in a C++ environment
 (V1 included basic demos in Python)
 
->>>>>>> b8137ae73a6b56a39a326b8c044a2463a2366edc
 ## Hardware:
 ODROID XU4, BNO055 IMU sensor, Intel RealSense R200, and a multitouch display
 
