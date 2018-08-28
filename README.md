@@ -1,6 +1,5 @@
 # AR HEADSET V2.0 #
 
-<<<<<<< HEAD
 This version of AR Headset allows for basic functionalities in a C++ environment
 (V1 included basic demos in Python)
 
