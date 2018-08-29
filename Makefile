@@ -66,13 +66,9 @@ OBJECTS = objects/Main.o \
     objects/RTPressureMS5611.o \
     objects/RTPressureMS5637.o 
 
-<<<<<<< HEAD
+
 FLAGS = -pipe -O2 -Wall -W -std=c++11
 LIBS = -L/usr/lib/arm-linux-gnueabihf -lncurses -lrealsense -lglfw
-=======
-FLAGS = -pipe -O2 -Wall -W 
-LIBS = -L/usr/lib/arm-linux-gnueabihf -lncurses
->>>>>>> b8137ae73a6b56a39a326b8c044a2463a2366edc
 LFLAGS			= -Wl,-O1
 INCPATH       	= -I. -I$(RTIMULIBPATH)
 COPY  			= cp -f
