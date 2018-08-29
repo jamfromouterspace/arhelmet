@@ -9,14 +9,12 @@
 // Namely, ax(), ay(), gx(), gy(), ... , euler angles phi(), theta() ...
 // displayBNOData("accel"), etc.
 #include "BNO.h"
-<<<<<<< HEAD
 // Intel RealSense SDk
 #include <librealsense/rs.hpp>
 #include <librealsense/rsutil.h>
 // GLFW -- OpenGL library for basic windows
 #include <GLFW/glfw3.h>
-=======
->>>>>>> b8137ae73a6b56a39a326b8c044a2463a2366edc
+
 // Miscellaneous functions
 #include "Tools.h"
 #include "Menus.h"
