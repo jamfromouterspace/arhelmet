@@ -17,7 +17,7 @@ printf "Updating system...\n\n"
 apt-get --yes update && apt-get --yes upgrade
 
 printf "\nInstalling basic dependencies...\n\n"
-apt-get --yes install cmake i2c-tools dconf-tools doxygen pkg-config git build-essential qtcreator wget curl unzip
+apt-get --yes install cmake i2c-tools dconf-tools doxygen pkg-config git build-essential qtcreator wget curl unzip vim
 
 printf "\nInstalling Odroid Utility\n\n"
 wget -O /usr/local/bin/odroid-utility.sh https://raw.githubusercontent.com/mdrjr/odroid-utility/master/odroid-utility.sh
