@@ -11,7 +11,7 @@ CVLIB_PATH="/usr/local/lib/libopencv*"
 
 clear
 
-: '
+
 printf "\nINSTALLING EVERYTHING\n\n"
 printf "Updating system...\n\n"
 apt-get --yes update && apt-get --yes upgrade
@@ -24,11 +24,11 @@ wget -O /usr/local/bin/odroid-utility.sh https://raw.githubusercontent.com/mdrjr
 chmod +x /usr/local/bin/odroid-utility.sh
 
 printf "\nInstalling ncurses library\n\n"
-apt-get --yes libncurses5-dev libncursesw5-dev
+apt-get --yes install libncurses5-dev libncursesw5-dev
 
 printf "\nInstalling Python\n\n"
 apt-get --yes install python-dev python-pip python3-dev python3-pip
-'
+
 # RealSense Library
 if [ ! -d $RS_DIR ] || [ ! -d $GLFW_DIR ] || [ ! -e $RSLIB_PATH ] || [ ! -e $GLFWLIB_PATH ]
 then
@@ -53,6 +53,9 @@ then
 	cd $DESKTOP/librealsense/build
 	cmake .. -DBUILD_EXAMPLES:BOOL=true
 	make && make install
+	printf "\nPatching uvc video drivers...\n\n"
+	./$DESKTOP/librealsense/scripts/patch-uvcvideo-16.04.simple.sh
+	modprobe uvcvideo
 	printf "\nRS example programs have been installed to /usr/local/bin\n\n"
 else
 	printf "\nRealSense library is already installed.\n\n"
