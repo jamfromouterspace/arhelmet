@@ -11,7 +11,7 @@ CVLIB_PATH="/usr/local/lib/libopencv*"
 
 clear
 
-
+: '
 printf "\nINSTALLING EVERYTHING\n\n"
 printf "Updating system...\n\n"
 apt-get --yes update && apt-get --yes upgrade
@@ -28,7 +28,7 @@ apt-get --yes libncurses5-dev libncursesw5-dev
 
 printf "\nInstalling Python\n\n"
 apt-get --yes install python-dev python-pip python3-dev python3-pip
-
+'
 # RealSense Library
 if [ ! -d $RS_DIR ] || [ ! -d $GLFW_DIR ] || [ ! -e $RSLIB_PATH ] || [ ! -e $GLFWLIB_PATH ]
 then
@@ -41,10 +41,16 @@ then
 	fi
 
 	wget -O $DOWNLOADS/librealsense.zip https://github.com/IntelRealSense/librealsense/archive/v1.12.1.zip
-	unzip $DOWNLOADS/librealsense.zip
-	cd $DOWNLOADS/librealsense-1*
-	mkdir build
-	cd build
+	
+	if [ -d $DESKTOP/librealsense ]
+	then
+		rm -rf $DESKTOP/librealsense
+	fi
+	unzip $DOWNLOADS/librealsense.zip -d $DOWNLOADS/librealsense
+	mv $DOWNLOADS/librealsense/librealsense-1* $DESKTOP/librealsense
+	rm -rf $DOWNLOADS/librealsense	
+	mkdir $DESKTOP/librealsense/build
+	cd $DESKTOP/librealsense/build
 	cmake .. -DBUILD_EXAMPLES:BOOL=true
 	make && make install
 	printf "\nRS example programs have been installed to /usr/local/bin\n\n"
@@ -74,21 +80,21 @@ if [ ! -e $CVLIB_PATH ] || [ ! -d $CV_DIR ]
 then
 	printf "\nInstalling OpenCV ...\n\n"
 	
-	if [ -d $DOWNLOADS/opencv ]
+	if [ -d $DESKTOP/opencv ]
 	then
-		rm -rf $DOWNLOADS/opencv
+		rm -rf $DESKTOP/opencv
 	fi
 
-	git clone https://github.com/opencv/opencv.git $DOWNLOADS/opencv
+	git clone https://github.com/opencv/opencv.git $DESKTOP/opencv
 
-	if [ -d $DOWNLOADS/opencv/build ]
+	if [ -d $DESKTOP/opencv/build ]
 	then
-		rm -rf $DOWNLOADS/opencv/build 
+		rm -rf $DESKTOP/opencv/build 
 	fi
 
-	mkdir $DOWNLOADS/opencv/build
+	mkdir $DESKTOP/opencv/build
 
-	cd $DOWNLOADS/opencv/build
+	cd $DESKTOP/opencv/build
 	cmake -D WITH_TBB=ON -D WITH_OPENMP=ON -D WITH_IPP=ON -D CMAKE_BUILD_TYPE=RELEASE -D BUILD_EXAMPLES=OFF -D WITH_NVCUVID=ON -D WITH_CUDA=ON -D BUILD_DOCS=OFF -D BUILD_PERF_TESTS=OFF -D BUILD_TESTS=OFF -D WITH_CSTRIPES=ON -D WITH_OPENCL=ON -D WITH_OPENGL=ON -D CMAKE_INSTALL_PREFIX=/usr/local/ ..
 	make -j4 && make install
 
