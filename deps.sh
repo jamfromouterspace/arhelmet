@@ -30,7 +30,7 @@ printf "\nInstalling Python\n\n"
 apt-get --yes install python-dev python-pip python3-dev python3-pip
 
 # RealSense Library
-if [ ! -d $RS_DIR ] || [ ! -d $GLFW_DIR ] || [ ! -e $RSLIB_PATH ] || [ ! -e $GLFWLIB_PATH ]
+if [ ! -d $RS_DIR ] || [ ! -e $RSLIB_PATH ]
 then
 	printf "\nRealSense library not found. Installing now...\n\n"
 	apt-get install libusb-1.0-0-dev libglfw3-dev
