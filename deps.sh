@@ -77,7 +77,7 @@ apt-get --yes install libx11-dev xorg-dev libglu1-mesa-dev freeglut3-dev libglew
 
 # OpenCV
 printf "\nInstalling OpenCV dependencies...\n\n"
-apt-get --yes --force-yes install checkinstall yasm gfortran libjpeg8-dev libjasper-dev libpng12-dev libtiff4-dev libtiff5-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine2-dev libv4l-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev qt5-default libgtk2.0-dev libtbb-dev libatlas-base-dev libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev x264 v4l-utils  libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev libhdf5-dev libgtk2.0-dev pkg-config
+apt-get --yes --force-yes install checkinstall yasm gfortran libjpeg8-dev libjasper-dev libpng12-dev libtiff4-dev libtiff5-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine2-dev libv4l-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev qt5-default libgtk2.0-dev libtbb-dev libatlas-base-dev libfaac-dev libmp3lame-dev libtheora-dev libvorbis-dev libxvidcore-dev libopencore-amrnb-dev libopencore-amrwb-dev x264 v4l-utils  libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev libgphoto2-dev libeigen3-dev libhdf5-dev libgtk2.0-dev libcairo2-doc libgtk2.0-doc libpango1.0-doc pkg-config
 
 if [ ! -e $CVLIB_PATH ] || [ ! -d $CV_DIR ]
 then
