@@ -1,5 +1,5 @@
 
-PROJECTPATH   = /home/odroid/Desktop/AR2
+PROJECTPATH   = /home/odroid/Desktop/arhelmet
 RTIMULIBPATH  = /home/odroid/Desktop/rtimulib/RTIMULib
 OBJECTS_DIR   = objects/
 
