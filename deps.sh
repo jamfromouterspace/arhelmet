@@ -8,7 +8,14 @@ RSLIB_PATH="/usr/local/lib/librealsense*"
 GLFWLIB_PATH="/usr/local/lib/libglfw*"
 CV_DIR="/usr/local/include/opencv*"
 CVLIB_PATH="/usr/local/lib/libopencv*"
-
+EIGEN_DIR="/usr/local/include/eigen3"
+BOOST_PATH="/usr/local/lib/libboost*"
+BOOST_DIR="/usr/local/include/boost*"
+FLANN_PATH="/usr/local/lib/libflann*"
+FLANN_DIR="/usr/local/include/flann*"
+VTK_PATH="/usr/local/lib/libvtk*"
+VTK_DIR="/usr/local/include/vtk*"
+PCL_PATH=""
 clear
 
 
@@ -81,7 +88,7 @@ apt-get --yes --force-yes install checkinstall yasm gfortran libjpeg8-dev libjas
 
 if [ ! -e $CVLIB_PATH ] || [ ! -d $CV_DIR ]
 then
-	printf "\nInstalling OpenCV ...\n\n"
+	printf "\nInstalling OpenCV...\n\n"
 	
 	if [ -d $DESKTOP/opencv ]
 	then
@@ -105,5 +112,119 @@ else
 	printf "\nOpenCV is already installed\n\n"
 fi
 
-printf "\n\nDONE. Consider rebooting.\n\n"
+printf "\nChecking PCL dependencies...\n\n"
 
+if [ ! -d $BOOST_DIR ] || [ ! -e $BOOST_PATH ]
+then
+	printf "\nInstalling Boost v1.66.0..."
+
+	if [ -d $DOWNLOADS/boost* ] || [ -e $DOWNLOADS/boost* ]
+	then
+		rm -rf $DOWNLOADS/boost*
+	fi
+
+	wget -O $DOWNLOADS/boost.tar.bz2 https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2
+	tar --bzip2 -xf $DOWNLOADS/boost.tar.bz2
+
+	if [ -d $DESKTOP/boost ]
+	then
+		rm -rf $DESKTOP/boost
+	fi
+
+	mv $DOWNLOADS/boost $DESKTOP/boost
+	cd $DESKTOP/boost/
+	./bootstrap.sh
+	./b2
+	sudo cp -a $DESKTOP/boost /usr/local/include
+	sudo cp -a $DESKTOP/boost/stage/lib/. /usr/local/lib
+	rm -rf $DOWNLOADS/boost*
+else
+	printf "\nBoost is already installed.\n\n"
+fi
+
+if [ ! -d $EIGEN_DIR ]
+then 
+	printf "\nInstalling Eigen...\n\n"
+	if [ -d $DESKTOP/eigen* ] || [ -e $DESKTOP/eigen* ]
+	then 
+		rm -rf $DOWNLOADS/eigen*
+	fi
+	git clone https://github.com/eigenteam/eigen-git-mirror.git $DESKTOP/eigen
+	mkdir $DESKTOP/eigen/build
+	cd $DESKTOP/eigen/build
+	cmake ..
+	sudo make install
+else
+	printf "\nEigen is already installed."
+fi
+
+if [ ! -e $FLANN_PATH ] || [ ! -d $FLANN_DIR ]
+then
+	printf "\nInstalling FLANN...\n\n"
+	if [ -d $DESKTOP/flann ]
+	then
+		rm -rf $DESKTOP/flann
+	fi
+
+	git clone https://github.com/mariusmuja/flann.git $DESKTOP/flann
+
+	mkdir $DESKTOP/flann/build
+	cd $DESKTOP/flann/build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make -j4
+	sudo make -j4 install
+else
+	printf "\nFLANN is already installed."
+fi
+
+
+
+if [ ! -e $VTK_PATH ] || [ ! -d $VTK_DIR ]
+then
+	printf "\nInstalling VTK...\n\n"
+	if [ -d $DESKTOP/vtk ]
+	then
+		rm -rf $DESKTOP/vtk
+	fi
+
+	git clone https://gitlab.kitware.com/vtk/vtk.git $DESKTOP/vtk
+
+	mkdir $DESKTOP/vtk/build
+	cd $DESKTOP/vtk/build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make -j4
+	sudo make -j4 install
+else
+	printf "\nVTK is already installed."
+fi
+
+
+if [ ! -e $PCL_PATH ] || [ ! -d $PCL_DIR ]
+then
+	printf "\nInstalling PCL v1.8.1...\n\n"
+
+	if [ -d $DOWNLOADS/pcl* ] || [ -e $DOWNLOADS/pcl* ]
+	then
+		rm -rf $DOWNLOADS/pcl*
+	fi
+
+	if [ -d $DESKTOP/pcl ]
+	then
+		rm -rf $DESKTOP/pcl
+	fi
+	wget -O $DOWNLOADS/pcl.zip https://github.com/PointCloudLibrary/pcl/archive/pcl-1.8.1.zip
+	unzip $DOWNLOADS/pcl.zip -d $DOWNLOADS/pcl
+	mv $DOWNLOADS/pcl/* $DESKTOP/pcl
+	rm -rf $DOWNLOADS/pcl*
+	mkdir $DESKTOP/pcl/build
+	cd $DESKTOP/pcl/build
+	cmake -DCMAKE_BUILD_TYPE=Release ..
+	make -j4
+	make -j4 install
+
+else
+	printf "\nPCL already installed."
+
+fi
+
+printf "\n\n----DONE!----\N\N"
