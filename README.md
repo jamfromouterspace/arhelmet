@@ -3,7 +3,7 @@
 This version of the Concordia Augmented Reality Headset allows for basic functionalities in a C++ environment (v0.1 included basic demos in Python). In other words, this code does the following:
 
 * Sensor integration with C++ libraries
-* Installation of important libraries
+* Automatic installation of important libraries
 * IMU data readout
 * AR depth demo
 * Pointcloud demo
@@ -12,7 +12,7 @@ This version of the Concordia Augmented Reality Headset allows for basic functio
 ## Important Notes:
 
 * If you're starting from scratch (fresh Ubuntu installation), setup might take all day.
-* Ubuntu 16.04 with kernel version 4 for ODROID XU4 is required.
+* [Ubuntu 16.04 with kernel version 4 for ODROID XU4](https://wiki.odroid.com/odroid-xu4/os_images/linux/ubuntu_4.9/ubuntu_4.9) is required. Librealsense legaacy does not support 18.04.
 * Make sure you clone this repo into a folder called `arhelmet` (or just blindly follow the code below)
 * Libraries are installed to `/usr/local/share/lib`
 * Header files are installed to `/usr/local/share/include`
@@ -57,13 +57,14 @@ This version of AR Headset allows for basic functionalities in a C++ environment
 (V1 included basic demos in Python)
 
 ## Hardware:
-ODROID XU4, BNO055 IMU sensor, Intel RealSense R200, and a multitouch display
+* ODROID XU4
+* BNO055 IMU sensor 
+* Intel RealSense R200
+* 720p Multitouch display
 
 ## Software: 
-Ubuntu 16.04, Ubuntu MATE
-
-## Libraries: 
-TIMULib2, librealsense (legacy version 1), and standard C/C++ libraries including ncurses   
+[Ubuntu 16.04 MATE with kernel v4.9 for ODROID XU4](https://wiki.odroid.com/odroid-xu4/os_images/linux/ubuntu_4.9/ubuntu_4.9).
+ 
 
 ## Currently working:
       - Pre-calibrated BNO055  
