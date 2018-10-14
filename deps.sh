@@ -15,7 +15,8 @@ FLANN_PATH="/usr/local/lib/libflann*"
 FLANN_DIR="/usr/local/include/flann*"
 VTK_PATH="/usr/local/lib/libvtk*"
 VTK_DIR="/usr/local/include/vtk*"
-PCL_PATH=""
+PCL_PATH="/usr/local/lib/libpcl*"
+PCL_DIR="/usr/local/include/pcl*"
 clear
 
 
@@ -114,33 +115,44 @@ fi
 
 printf "\nChecking PCL dependencies...\n\n"
 
-if [ ! -d $BOOST_DIR ] || [ ! -e $BOOST_PATH ]
-then
-	printf "\nInstalling Boost v1.66.0..."
+# Basic dependencies and QHull
+sudo apt -y install cmake-gui doxygen mpi-default-dev openmpi-bin openmpi-common libusb-1.0-0-dev libqhull* libusb-dev libgtest-dev
+sudo apt -y install git-core freeglut3-dev libxmu-dev libxi-dev libphonon-dev libphonon-dev phonon-backend-gstreamer
+sudo apt -y install phonon-backend-vlc graphviz mono-complete qt-sdk libflann-dev
+# FLANN and Boost
+sudo apt -y install libflann1.8 libboost1.58-all-dev
 
-	if [ -d $DOWNLOADS/boost* ] || [ -e $DOWNLOADS/boost* ]
-	then
-		rm -rf $DOWNLOADS/boost*
-	fi
 
-	wget -O $DOWNLOADS/boost.tar.bz2 https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2
-	tar --bzip2 -xf $DOWNLOADS/boost.tar.bz2
+# Install Boost from source
+# (PCL doesn't seem to detect it this way)
 
-	if [ -d $DESKTOP/boost ]
-	then
-		rm -rf $DESKTOP/boost
-	fi
+# if [ ! -d $BOOST_DIR ] || [ ! -e $BOOST_PATH ]
+# then
+# 	printf "\nInstalling Boost v1.66.0..."
 
-	mv $DOWNLOADS/boost $DESKTOP/boost
-	cd $DESKTOP/boost/
-	./bootstrap.sh
-	./b2
-	sudo cp -a $DESKTOP/boost /usr/local/include
-	sudo cp -a $DESKTOP/boost/stage/lib/. /usr/local/lib
-	rm -rf $DOWNLOADS/boost*
-else
-	printf "\nBoost is already installed.\n\n"
-fi
+# 	if [ -d $DOWNLOADS/boost* ] || [ -e $DOWNLOADS/boost* ]
+# 	then
+# 		rm -rf $DOWNLOADS/boost*
+# 	fi
+
+# 	wget -O $DOWNLOADS/boost.tar.bz2 https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.bz2
+# 	tar --bzip2 -xf $DOWNLOADS/boost.tar.bz2
+
+# 	if [ -d $DESKTOP/boost ]
+# 	then
+# 		rm -rf $DESKTOP/boost
+# 	fi
+
+# 	mv $DOWNLOADS/boost $DESKTOP/boost
+# 	cd $DESKTOP/boost/
+# 	./bootstrap.sh
+# 	./b2
+# 	sudo cp -a $DESKTOP/boost /usr/local/include
+# 	sudo cp -a $DESKTOP/boost/stage/lib/. /usr/local/lib
+# 	rm -rf $DOWNLOADS/boost*
+# else
+# 	printf "\nBoost is already installed.\n\n"
+# fi
 
 if [ ! -d $EIGEN_DIR ]
 then 
@@ -158,30 +170,34 @@ else
 	printf "\nEigen is already installed."
 fi
 
-if [ ! -e $FLANN_PATH ] || [ ! -d $FLANN_DIR ]
-then
-	printf "\nInstalling FLANN...\n\n"
-	if [ -d $DESKTOP/flann ]
-	then
-		rm -rf $DESKTOP/flann
-	fi
 
-	git clone https://github.com/mariusmuja/flann.git $DESKTOP/flann
+# FLANN from source
+# (Not needed)
 
-	mkdir $DESKTOP/flann/build
-	cd $DESKTOP/flann/build
-	cmake -DCMAKE_BUILD_TYPE=Release ..
-	make -j4
-	sudo make -j4 install
-else
-	printf "\nFLANN is already installed."
-fi
+# if [ ! -e $FLANN_PATH ] || [ ! -d $FLANN_DIR ]
+# then
+# 	printf "\nInstalling FLANN...\n\n"
+# 	if [ -d $DESKTOP/flann ]
+# 	then
+# 		rm -rf $DESKTOP/flann
+# 	fi
+
+# 	git clone https://github.com/mariusmuja/flann.git $DESKTOP/flann
+
+# 	mkdir $DESKTOP/flann/build
+# 	cd $DESKTOP/flann/build
+# 	cmake -DCMAKE_BUILD_TYPE=Release ..
+# 	make -j4
+# 	sudo make -j4 install
+# else
+# 	printf "\nFLANN is already installed."
+# fi
 
 
 
 if [ ! -e $VTK_PATH ] || [ ! -d $VTK_DIR ]
 then
-	printf "\nInstalling VTK...\n\n"
+	printf "\nInstalling VTK... This will take a while\n\n"
 	if [ -d $DESKTOP/vtk ]
 	then
 		rm -rf $DESKTOP/vtk
