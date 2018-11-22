@@ -1,5 +1,5 @@
 
-PROJECTPATH   = /home/odroid/Desktop/arhelmet
+PROJECTPATH   = /home/odroid/Desktop/AR2
 RTIMULIBPATH  = /home/odroid/Desktop/rtimulib/RTIMULib
 OBJECTS_DIR   = objects/
 
@@ -67,8 +67,8 @@ OBJECTS = objects/Main.o \
     objects/RTPressureMS5637.o 
 
 
-FLAGS = -pipe -O2 -Wall -W -std=c++11
-LIBS = -L/usr/lib/arm-linux-gnueabihf -lncurses -lrealsense -lglfw
+FLAGS = -pipe -O2 -Wall -W -std=c++11 `pkg-config opencv --libs --cflags`
+LIBS = -L/usr/lib/arm-linux-gnueabihf -lncurses -lGL -lGLU -lglut -lglfw -lrealsense -lopencv_core -lopencv_highgui -lopencv_imgproc -lX11
 LFLAGS			= -Wl,-O1
 INCPATH       	= -I. -I$(RTIMULIBPATH)
 COPY  			= cp -f
