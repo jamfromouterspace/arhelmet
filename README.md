@@ -12,7 +12,7 @@ This version of the Concordia Augmented Reality Headset allows for basic functio
 ## Important Notes:
 
 * If you're starting from scratch (fresh Ubuntu installation), setup might take all day.
-* [Ubuntu 16.04 with kernel version 4 for ODROID XU4](https://wiki.odroid.com/odroid-xu4/os_images/linux/ubuntu_4.9/ubuntu_4.9) is required. Librealsense legaacy does not support 18.04.
+* [Ubuntu 16.04 with kernel version 4 for ODROID XU4](https://wiki.odroid.com/odroid-xu4/os_images/linux/ubuntu_4.9/ubuntu_4.9) is required. Librealsense legacy does not support 18.04.
 * Make sure you clone this repo into a folder called `arhelmet` (or just blindly follow the code below)
 * Libraries are installed to `/usr/local/share/lib`
 * Header files are installed to `/usr/local/share/include`
@@ -37,7 +37,7 @@ PCL has several [dependencies](http://www.pointclouds.org/documentation/tutorial
 
 **This takes a long time (1-3 hours).**
 
-*NOTE: The AR2 code has only been tested on an Odroid XU4.*
+*NOTE: The AR2 code has only been tested on an ODROID XU4.*
 
 To install, run the following commands in the terminal:
 
